@@ -1,7 +1,7 @@
 <template>
 
   <header>
-    <h1 class="text-2xl p-4 text-center">Formbuilder Example</h1>
+    <h1 class="text-2xl p-4 text-center">Formbuilder Demo</h1>
   </header>
 
   <main class="container mx-auto flex flex-col gap-4">
@@ -14,10 +14,14 @@
             class="flex-grow"
             @schemaUpdated="(e)=>resultFormBuilder=e"
         />
-        <textarea>{{resultFormBuilder}}</textarea>
+        <aside>
+          <FormPreview :jsonform="resultFormBuilder" />
+        </aside>
     </section>
 
-    <h2 class="text-xl">2. At JsonForms as FormbuilderRenderer</h2>
+
+
+    <h2 class="text-xl">2. At JsonForms as FormbuilderRenderer (schemaOnly)</h2>
     <section>
       <div class="styleA flex-grow">
         <JsonForms
@@ -28,7 +32,10 @@
             @change="(e)=>resultJsonForms=e?.data"
         />
       </div>
-      <textarea>{{resultJsonForms}}</textarea>
+
+      <aside>
+        <FormPreview :jsonform="resultJsonForms" />
+      </aside>
     </section>
 
   </main>
@@ -44,8 +51,8 @@ main > section {
   bg-white shadow p-4 mb-8
   flex flex-row
 }
-main > section > textarea {
-  @apply w-1/3 ml-4 font-mono text-xs
+main > section > aside {
+  @apply w-4/12 ml-4 flex flex-col
 }
 </style>
 
@@ -58,6 +65,7 @@ import {FormBuilder, defaultTools, boplusVueVanillaRenderers, formbuilderRendere
 import '@backoffice-plus/formbuilder/style.css'
 import './style.css'
 import './form.stylea.css'
+import FormPreview from "@/components/FormPreview.vue";
 
 
 const tools = [
