@@ -54,6 +54,22 @@ const key = ref();
 
 const schema = ref();
 
+// for receiving json schema update
+window.addEventListener(
+    "message",
+    (event) => {
+      try {
+        const schemaValue = JSON.parse(event.data);
+        schema.value = schemaValue;
+        key.value = Math.random();
+      } catch (e) {
+
+      }
+    },
+    false,
+);
+
+// for sending json schema updates
 const onSchemaUpdated = (e) => {
   const jfString = JSON.stringify(e.schema)
   resultFormBuilder.value = JSON.parse(jfString);
